@@ -19,9 +19,22 @@ sf::RenderWindow& Window::getRenderWindow()
 {
 	return m_window;
 }
+EventManager* Window::getEventManager()
+{
+	return &m_eventManager;
+}
+void Window::close(EventDetails* l_event) 
+{ 
+	m_isDone = true; 
+}
 
 void Window::setup(const std::string& l_title, const sf::Vector2u& l_size)
 {
+	m_isFocused = true; // Default value for focused flag.
+	m_eventManager.addCallback("Fullscreen_toggle",
+		&Window::toggleFullscreen, this);
+	m_eventManager.addCallback("Window_close",
+		&Window::close, this);
 	m_windowTitle = l_title;
 	m_windowSize = l_size;
 	m_isFullscreen = false;
@@ -35,28 +48,29 @@ void Window::create()
 	m_window.create({ m_windowSize.x, m_windowSize.y, 32 }, m_windowTitle, style);
 }
 
+
 void Window::destroy()
 {
 	m_window.close();
 }
 
-void Window::update()
-{
+void Window::update() {
 	sf::Event event;
-	while (m_window.pollEvent(event))
-	{
-		if (event.type == sf::Event::Closed)
-		{
-			m_isDone = true;
+	while (m_window.pollEvent(event)) {
+		if (event.type == sf::Event::LostFocus) {
+			m_isFocused = false;
+			m_eventManager.setFocus(false);
 		}
-		else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::F5)
-		{
-			toggleFullscreen();
+		else if (event.type == sf::Event::GainedFocus) {
+			m_isFocused = true;
+			m_eventManager.setFocus(true);
 		}
+		m_eventManager.handleEvent(event);
 	}
+	m_eventManager.update();
 }
 
-void Window::toggleFullscreen()
+void Window::toggleFullscreen(EventDetails* l_event)
 {
 	m_isFullscreen = !m_isFullscreen;
 	destroy();

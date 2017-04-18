@@ -5,7 +5,6 @@
 
 #ifndef EventManager_hpp
 #define EventManager_hpp
-using Events = std::vector<std::pair<EventType, EventInfo>>;
 
 enum class EventType 
 {
@@ -39,6 +38,8 @@ struct EventInfo
 		int m_code;
 	};
 };
+using Events = std::vector<std::pair<EventType, EventInfo>>;
+
 
 struct EventDetails
 {
