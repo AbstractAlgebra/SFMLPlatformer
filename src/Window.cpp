@@ -87,7 +87,7 @@ void Window::endDraw()
 	m_window.display();
 }
 
-void Window::Draw(sf::Drawable& l_drawable)
+void Window::draw(sf::Drawable& l_drawable)
 {
 	m_window.draw(l_drawable);
 }

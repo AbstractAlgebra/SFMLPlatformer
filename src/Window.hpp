@@ -24,7 +24,7 @@ public:
 	bool isDone();
 	bool isFullscreen();
 	sf::Vector2u getWindowSize();
-	void Draw(sf::Drawable& l_drawable);
+	void draw(sf::Drawable& l_drawable);
 
 private:
 	void setup(const std::string& l_title, const sf::Vector2u& l_size);

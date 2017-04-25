@@ -22,7 +22,7 @@ private:
 	void moveSmile();
 	Window* m_window;
 	Textbox m_textbox;
-	sf::Texture m_smileTexture;
+	sf::Texture m_texture;
 	sf::Sprite m_sprite;
 	sf::Vector2i m_increment;
 	sf::Clock m_clock;

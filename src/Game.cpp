@@ -5,10 +5,14 @@
 Game::Game()
 	:m_window(new Window("Sprite Demo", sf::Vector2u(800, 600)))
 {
+	m_texture.loadFromFile("resources/img/smile.png");
+	m_sprite.setTexture(m_texture);
+	m_window->getEventManager()->addCallback("Move", &Game::moveSprite, this);
 }
 
 Game::~Game()
 {
+
 }
 
 void Game::update()
@@ -31,7 +35,7 @@ void Game::moveSprite(EventDetails* l_details)
 void Game::render()
 {
 	m_window->beginDraw();
-
+	m_window->draw(m_sprite);
 	m_window->endDraw();
 }
 

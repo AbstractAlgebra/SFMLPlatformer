@@ -137,8 +137,11 @@ void EventManager::loadBindings()
 {
 	std::string delimiter = ":";
 	std::ifstream bindings;
+	std::ofstream temp;
+	temp.open("teszt");
 	bindings.open("keys.cfg");
 	if (!bindings.is_open()) {
+
 		std::cout << "! Failed loading keys.cfg." << std::endl;
 		return;
 	}
