@@ -4,7 +4,7 @@
 #define window_hpp
 #include <string>
 
-#include "EventManager.h"
+#include "EventManager.hpp"
 #include<SFML/Graphics.hpp>
 class Window
 {
